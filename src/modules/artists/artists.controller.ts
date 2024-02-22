@@ -76,7 +76,7 @@ export class ArtistsController {
   })
   @ApiResponse({
     status: HttpStatus.NOT_FOUND,
-    description: 'Get all users',
+    description: 'Get all artists',
     type: NotFoundRes,
   })
   @ApiResponse({
@@ -85,7 +85,7 @@ export class ArtistsController {
     type: ForbiddenRes,
   })
   @ApiOperation({
-    operationId: 'getAllAtists',
+    operationId: 'getAllArtists',
     description: 'Get all artists',
   })
   getAllArtists(): ArtistDto[] {

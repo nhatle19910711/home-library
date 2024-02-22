@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IArtist, ICreateArtist, IUpdateArtist } from './artist.interface';
+import { IArtist, ICreateArtist, IUpdateArtist } from './artists.interface';
 import { IsBoolean, IsDefined, IsNotEmpty, IsOptional, IsString } from 'class-validator';
 import { Transform } from 'class-transformer';
 

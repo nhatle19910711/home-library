@@ -35,7 +35,7 @@
           "201": {
             "description": "Create a new user",
             "schema": {
-              "$ref": "#/definitions/UserResDto"
+              "$ref": "#/definitions/UserDto"
             }
           },
           "400": {
@@ -84,7 +84,7 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/UserResDto"
+                "$ref": "#/definitions/UserDto"
               }
             }
           },
@@ -138,7 +138,7 @@
           "200": {
             "description": "Get user by id",
             "schema": {
-              "$ref": "#/definitions/UserResDto"
+              "$ref": "#/definitions/UserDto"
             }
           },
           "400": {
@@ -197,7 +197,7 @@
           "200": {
             "description": "Update password for user",
             "schema": {
-              "$ref": "#/definitions/UserResDto"
+              "$ref": "#/definitions/UserDto"
             }
           },
           "400": {
@@ -342,7 +342,7 @@
         ]
       },
       "get": {
-        "operationId": "getAllAtists",
+        "operationId": "getAllArtists",
         "summary": "",
         "description": "Get all artists",
         "parameters": [],
@@ -369,7 +369,7 @@
             }
           },
           "404": {
-            "description": "Get all users",
+            "description": "Get all artists",
             "schema": {
               "$ref": "#/definitions/NotFoundRes"
             }
@@ -554,6 +554,155 @@
           "application/json"
         ]
       }
+    },
+    "/api/home-library/albums": {
+      "post": {
+        "operationId": "createAlbum",
+        "summary": "",
+        "description": "Create a new album",
+        "parameters": [
+          {
+            "required": true,
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/CreateAlbumDto"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Create a new album",
+            "schema": {
+              "$ref": "#/definitions/AlbumDto"
+            }
+          },
+          "400": {
+            "description": "Create a new album",
+            "schema": {
+              "$ref": "#/definitions/BadRequestRes"
+            }
+          },
+          "403": {
+            "description": "Create a new album",
+            "schema": {
+              "$ref": "#/definitions/ForbiddenRes"
+            }
+          },
+          "404": {
+            "description": "Create a new album",
+            "schema": {
+              "$ref": "#/definitions/NotFoundRes"
+            }
+          },
+          "500": {
+            "description": "Create a new album",
+            "schema": {
+              "$ref": "#/definitions/InternalServerErrorRes"
+            }
+          }
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ]
+      },
+      "get": {
+        "operationId": "getAllAlbums",
+        "summary": "",
+        "description": "Get all albums",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Get all albums",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/AlbumDto"
+              }
+            }
+          },
+          "400": {
+            "description": "Get all albums",
+            "schema": {
+              "$ref": "#/definitions/BadRequestRes"
+            }
+          },
+          "403": {
+            "description": "Get all albums",
+            "schema": {
+              "$ref": "#/definitions/ForbiddenRes"
+            }
+          },
+          "404": {
+            "description": "Get all albums",
+            "schema": {
+              "$ref": "#/definitions/NotFoundRes"
+            }
+          },
+          "500": {
+            "description": "Get all albums",
+            "schema": {
+              "$ref": "#/definitions/InternalServerErrorRes"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/api/home-library/albums/{id}": {
+      "get": {
+        "operationId": "getAlbumById",
+        "summary": "",
+        "description": "Get album by id",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get album by id",
+            "schema": {
+              "$ref": "#/definitions/AlbumDto"
+            }
+          },
+          "400": {
+            "description": "Get album by id",
+            "schema": {
+              "$ref": "#/definitions/BadRequestRes"
+            }
+          },
+          "403": {
+            "description": "Get album by id",
+            "schema": {
+              "$ref": "#/definitions/ForbiddenRes"
+            }
+          },
+          "404": {
+            "description": "Get album by id",
+            "schema": {
+              "$ref": "#/definitions/NotFoundRes"
+            }
+          },
+          "500": {
+            "description": "Get album by id",
+            "schema": {
+              "$ref": "#/definitions/InternalServerErrorRes"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      }
     }
   },
   "info": {
@@ -585,13 +734,16 @@
         "password"
       ]
     },
-    "UserResDto": {
+    "UserDto": {
       "type": "object",
       "properties": {
         "id": {
           "type": "string"
         },
         "login": {
+          "type": "string"
+        },
+        "password": {
           "type": "string"
         },
         "version": {
@@ -609,6 +761,7 @@
       "required": [
         "id",
         "login",
+        "password",
         "version",
         "createdAt",
         "updatedAt"
@@ -785,6 +938,50 @@
           "type": "boolean"
         }
       }
+    },
+    "CreateAlbumDto": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "year": {
+          "type": "number"
+        },
+        "artistId": {
+          "type": "string",
+          "x-nullable": true
+        }
+      },
+      "required": [
+        "name",
+        "year",
+        "artistId"
+      ]
+    },
+    "AlbumDto": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "year": {
+          "type": "number"
+        },
+        "artistId": {
+          "type": "string",
+          "x-nullable": true
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "year",
+        "artistId"
+      ]
     }
   },
   "securityDefinitions": {

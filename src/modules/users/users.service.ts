@@ -4,15 +4,17 @@ import {
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
-import { ICreateUser, IUpdatePassword, IUser, IUserRes } from './users.interface';
+import { ICreateUser, IUpdatePassword, IUser } from './users.interface';
 import { UsersRepository } from './users.repository';
 import { v4 as uuidV4, validate } from 'uuid';
+import { plainToClass } from 'class-transformer';
+import { UserDto } from './users.dto';
 
 @Injectable()
 export class UsersService {
   constructor(private readonly repo: UsersRepository) {}
 
-  createUser(data: ICreateUser): IUserRes {
+  createUser(data: ICreateUser): IUser {
     const newUser: IUser = {
       id: uuidV4().toString(),
       login: data.login,
@@ -24,28 +26,16 @@ export class UsersService {
 
     this.repo.create(newUser);
 
-    return {
-      id: newUser.id,
-      login: newUser.login,
-      version: newUser.version,
-      createdAt: newUser.createdAt,
-      updatedAt: newUser.updatedAt,
-    };
+    return plainToClass(UserDto, newUser);
   }
 
-  getAllUsers(): IUserRes[] {
+  getAllUsers(): IUser[] {
     const users = this.repo.findAll();
 
-    return users.map((user) => ({
-      id: user.id,
-      login: user.login,
-      version: user.version,
-      createdAt: user.createdAt,
-      updatedAt: user.updatedAt,
-    }));
+    return users.map((user) => plainToClass(UserDto, user));
   }
 
-  getUserById(id: string): IUserRes {
+  getUserById(id: string): IUser {
     if (!validate(id)) {
       throw new BadRequestException('Id is invalid');
     }
@@ -54,16 +44,10 @@ export class UsersService {
       throw new NotFoundException('User is not found');
     }
 
-    return {
-      id: user.id,
-      login: user.login,
-      version: user.version,
-      createdAt: user.createdAt,
-      updatedAt: user.updatedAt,
-    };
+    return plainToClass(UserDto, user);
   }
 
-  updatePassword(id: string, data: IUpdatePassword): IUserRes {
+  updatePassword(id: string, data: IUpdatePassword): IUser {
     if (!validate(id)) {
       throw new BadRequestException('Id is invalid');
     }
@@ -79,13 +63,7 @@ export class UsersService {
 
     const updateUser = this.repo.updatePassword(id, data.newPassword);
 
-    return {
-      id: updateUser.id,
-      login: updateUser.login,
-      version: updateUser.version,
-      createdAt: updateUser.createdAt,
-      updatedAt: updateUser.updatedAt,
-    };
+    return plainToClass(UserDto, updateUser);
   }
 
   deleteUser(id: string): void {
