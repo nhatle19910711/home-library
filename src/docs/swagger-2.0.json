@@ -148,7 +148,7 @@
             }
           },
           "403": {
-            "description": "Get all users",
+            "description": "Get user by id",
             "schema": {
               "$ref": "#/definitions/ForbiddenRes"
             }
@@ -278,6 +278,164 @@
         },
         "tags": [
           "Users"
+        ],
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/api/home-library/artists": {
+      "post": {
+        "operationId": "createArtist",
+        "summary": "",
+        "description": "Create a new artist",
+        "parameters": [
+          {
+            "required": true,
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/CreateArtistDto"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Create a new artist",
+            "schema": {
+              "$ref": "#/definitions/ArtistDto"
+            }
+          },
+          "400": {
+            "description": "Create a new artist",
+            "schema": {
+              "$ref": "#/definitions/BadRequestRes"
+            }
+          },
+          "403": {
+            "description": "Create a new artist",
+            "schema": {
+              "$ref": "#/definitions/ForbiddenRes"
+            }
+          },
+          "404": {
+            "description": "Create a new artist",
+            "schema": {
+              "$ref": "#/definitions/NotFoundRes"
+            }
+          },
+          "500": {
+            "description": "Create a new artist",
+            "schema": {
+              "$ref": "#/definitions/InternalServerErrorRes"
+            }
+          }
+        },
+        "tags": [
+          "Artists"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ]
+      },
+      "get": {
+        "operationId": "getAllAtists",
+        "summary": "",
+        "description": "Get all artists",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Get all artists",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ArtistDto"
+              }
+            }
+          },
+          "400": {
+            "description": "Get all artists",
+            "schema": {
+              "$ref": "#/definitions/BadRequestRes"
+            }
+          },
+          "403": {
+            "description": "Get all artists",
+            "schema": {
+              "$ref": "#/definitions/ForbiddenRes"
+            }
+          },
+          "404": {
+            "description": "Get all users",
+            "schema": {
+              "$ref": "#/definitions/NotFoundRes"
+            }
+          },
+          "500": {
+            "description": "Get all artists",
+            "schema": {
+              "$ref": "#/definitions/InternalServerErrorRes"
+            }
+          }
+        },
+        "tags": [
+          "Artists"
+        ],
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/api/home-library/artists/{id}": {
+      "get": {
+        "operationId": "getArtistById",
+        "summary": "",
+        "description": "Get artist by id",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get artist by id",
+            "schema": {
+              "$ref": "#/definitions/ArtistDto"
+            }
+          },
+          "400": {
+            "description": "Get artist by id",
+            "schema": {
+              "$ref": "#/definitions/BadRequestRes"
+            }
+          },
+          "403": {
+            "description": "Get artist by id",
+            "schema": {
+              "$ref": "#/definitions/ForbiddenRes"
+            }
+          },
+          "404": {
+            "description": "Get artist by id",
+            "schema": {
+              "$ref": "#/definitions/NotFoundRes"
+            }
+          },
+          "500": {
+            "description": "Get artist by id",
+            "schema": {
+              "$ref": "#/definitions/InternalServerErrorRes"
+            }
+          }
+        },
+        "tags": [
+          "Artists"
         ],
         "produces": [
           "application/json"
@@ -468,6 +626,40 @@
       "required": [
         "oldPassword",
         "newPassword"
+      ]
+    },
+    "CreateArtistDto": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "grammy": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "name",
+        "grammy"
+      ]
+    },
+    "ArtistDto": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "grammy": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "grammy"
       ]
     }
   },

@@ -191,7 +191,7 @@
             }
           },
           "403": {
-            "description": "Get all users",
+            "description": "Get user by id",
             "content": {
               "application/json": {
                 "schema": {
@@ -366,6 +366,215 @@
         },
         "tags": [
           "Users"
+        ]
+      }
+    },
+    "/api/home-library/artists": {
+      "post": {
+        "operationId": "createArtist",
+        "summary": "",
+        "description": "Create a new artist",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateArtistDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Create a new artist",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ArtistDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Create a new artist",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestRes"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Create a new artist",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForbiddenRes"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Create a new artist",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundRes"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Create a new artist",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InternalServerErrorRes"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Artists"
+        ]
+      },
+      "get": {
+        "operationId": "getAllAtists",
+        "summary": "",
+        "description": "Get all artists",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Get all artists",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ArtistDto"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Get all artists",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestRes"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Get all artists",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForbiddenRes"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Get all users",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundRes"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Get all artists",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InternalServerErrorRes"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Artists"
+        ]
+      }
+    },
+    "/api/home-library/artists/{id}": {
+      "get": {
+        "operationId": "getArtistById",
+        "summary": "",
+        "description": "Get artist by id",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get artist by id",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ArtistDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Get artist by id",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestRes"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Get artist by id",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForbiddenRes"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Get artist by id",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundRes"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Get artist by id",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InternalServerErrorRes"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Artists"
         ]
       }
     }
@@ -560,6 +769,40 @@
         "required": [
           "oldPassword",
           "newPassword"
+        ]
+      },
+      "CreateArtistDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "grammy": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "name",
+          "grammy"
+        ]
+      },
+      "ArtistDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "grammy": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "grammy"
         ]
       }
     }

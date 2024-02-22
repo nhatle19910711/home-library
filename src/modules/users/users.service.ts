@@ -54,7 +54,13 @@ export class UsersService {
       throw new NotFoundException('User is not found');
     }
 
-    return user;
+    return {
+      id: user.id,
+      login: user.login,
+      version: user.version,
+      createdAt: user.createdAt,
+      updatedAt: user.updatedAt,
+    };
   }
 
   updatePassword(id: string, data: IUpdatePassword): IUserRes {

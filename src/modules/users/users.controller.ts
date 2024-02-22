@@ -115,7 +115,7 @@ export class UsersController {
   })
   @ApiResponse({
     status: HttpStatus.FORBIDDEN,
-    description: 'Get all users',
+    description: 'Get user by id',
     type: ForbiddenRes,
   })
   @ApiOperation({
