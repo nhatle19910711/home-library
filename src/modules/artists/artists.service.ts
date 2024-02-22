@@ -1,10 +1,6 @@
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { ArtistsRepository } from './artists.repository';
-<<<<<<< HEAD
-import { IArtist, ICreateArtist, IUpdateArtist } from './artist.interface';
-=======
 import { IArtist, ICreateArtist, IUpdateArtist } from './artists.interface';
->>>>>>> 74ac46c (Album module)
 import { v4 as uuidV4, validate } from 'uuid';
 
 @Injectable()
