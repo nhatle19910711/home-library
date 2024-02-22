@@ -1,0 +1,15 @@
+service:
+  name: api-home-library
+  description: API Home Library
+  baseUrl: /api/home-library
+  docsBaseUrl: /docs/home-library
+  apiVersion: 1.0.0
+  appVersion: 1.0.0
+
+server:
+  host: 127.0.0.1
+  port: 4000
+  hostname: 127.0.0.1:4000
+  swaggerSchema: http
+
+NODE_ENV: development
