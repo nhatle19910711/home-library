@@ -13,9 +13,11 @@ export async function initializeSwagger(app: INestApplication) {
   const apiVersion = config.get<string>('service.apiVersion');
 
   const options = new DocumentBuilder()
-    .setTitle(`${serviceName} API spec`)
+    .setTitle(`${serviceName} API`)
     .setDescription(
-      `${serviceDescription} | [swagger.json](swagger.json) | [swagger-2.0.json](swagger-2.0.json)`,
+      `${serviceDescription} | [swagger.json](${config.get(
+        'service.docsBaseUrl',
+      )}/swagger.json) | [swagger-2.0.json](${config.get('service.docsBaseUrl')}/swagger-2.0.json)`,
     )
     .setVersion(apiVersion)
     .addServer(`${config.get('server.swaggerSchema')}://${config.get('server.hostname')}`)
@@ -57,8 +59,8 @@ async function generateSwaggerSpecs(
 }
 
 function writeSwaggerJson(path: string, swagger2: any, oas3: OpenAPIObject) {
-  const swaggerFile = `${path}/swagger.json`;
-  const swaggerFile2 = `${path}/swagger-2.0.json`;
+  const swaggerFile = `${path}/src/docs/swagger.json`;
+  const swaggerFile2 = `${path}/src/docs/swagger-2.0.json`;
   fs.writeFileSync(swaggerFile, JSON.stringify(oas3, null, 2), {
     encoding: 'utf8',
   });

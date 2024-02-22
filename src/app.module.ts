@@ -6,6 +6,8 @@ import { LoggerModule } from 'nestjs-pino';
 import * as pino from 'pino';
 import { APP_FILTER } from '@nestjs/core';
 import { AnyExceptionFilter } from './filters/any-exception.filter';
+import { UsersModule } from './modules/users/users.module';
+import { ArtistsModule } from './modules/artists/artists.module';
 
 @Module({
   imports: [
@@ -28,6 +30,8 @@ import { AnyExceptionFilter } from './filters/any-exception.filter';
         };
       },
     }),
+    UsersModule,
+    ArtistsModule,
   ],
   controllers: [AppController],
   providers: [

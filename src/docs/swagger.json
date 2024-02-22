@@ -1,0 +1,971 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/api/home-library/ping": {
+      "get": {
+        "operationId": "ping",
+        "summary": "",
+        "description": "Ping pong",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Ping"
+        ]
+      }
+    },
+    "/api/home-library/users": {
+      "post": {
+        "operationId": "createUser",
+        "summary": "",
+        "description": "Create a new user",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateUserDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Create a new user",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserResDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Create a new user",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestRes"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Create a new user",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForbiddenRes"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Create a new user",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundRes"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Create a new user",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InternalServerErrorRes"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Users"
+        ]
+      },
+      "get": {
+        "operationId": "getALLUsers",
+        "summary": "",
+        "description": "Get all users",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Get all users",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/UserResDto"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Get all users",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestRes"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Get all users",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForbiddenRes"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Get all users",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundRes"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Get all users",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InternalServerErrorRes"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Users"
+        ]
+      }
+    },
+    "/api/home-library/users/{id}": {
+      "get": {
+        "operationId": "getUserById",
+        "summary": "",
+        "description": "Get user by id",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get user by id",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserResDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Get user by id",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestRes"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Get user by id",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForbiddenRes"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Get user by id",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundRes"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Get user by id",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InternalServerErrorRes"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Users"
+        ]
+      },
+      "put": {
+        "operationId": "updatePassword",
+        "summary": "",
+        "description": "Update password for user",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdatePasswordDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Update password for user",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserResDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Update password for user",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestRes"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Update password for user",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForbiddenRes"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Update password for user",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundRes"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Update password for user",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InternalServerErrorRes"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Users"
+        ]
+      },
+      "delete": {
+        "operationId": "updatePassword",
+        "summary": "",
+        "description": "Delete user",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Delete user"
+          },
+          "400": {
+            "description": "Delete user",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestRes"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Delete user",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForbiddenRes"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Delete user",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundRes"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Delete user",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InternalServerErrorRes"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Users"
+        ]
+      }
+    },
+    "/api/home-library/artists": {
+      "post": {
+        "operationId": "createArtist",
+        "summary": "",
+        "description": "Create a new artist",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateArtistDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Create a new artist",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ArtistDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Create a new artist",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestRes"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Create a new artist",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForbiddenRes"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Create a new artist",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundRes"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Create a new artist",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InternalServerErrorRes"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Artists"
+        ]
+      },
+      "get": {
+        "operationId": "getAllAtists",
+        "summary": "",
+        "description": "Get all artists",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Get all artists",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ArtistDto"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Get all artists",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestRes"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Get all artists",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForbiddenRes"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Get all users",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundRes"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Get all artists",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InternalServerErrorRes"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Artists"
+        ]
+      }
+    },
+    "/api/home-library/artists/{id}": {
+      "get": {
+        "operationId": "getArtistById",
+        "summary": "",
+        "description": "Get artist by id",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get artist by id",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ArtistDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Get artist by id",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestRes"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Get artist by id",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForbiddenRes"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Get artist by id",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundRes"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Get artist by id",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InternalServerErrorRes"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Artists"
+        ]
+      },
+      "put": {
+        "operationId": "updateArtist",
+        "summary": "",
+        "description": "Update artist",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateArtistDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Update artist",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ArtistDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Update artist",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestRes"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Update artist",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForbiddenRes"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Update artist",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundRes"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Update artist",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InternalServerErrorRes"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Artists"
+        ]
+      },
+      "delete": {
+        "operationId": "deleteArtist",
+        "summary": "",
+        "description": "Delete artist",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Delete artist",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ArtistDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Delete artist",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestRes"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Delete artist",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForbiddenRes"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Delete artist",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundRes"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Delete artist",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InternalServerErrorRes"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Artists"
+        ]
+      }
+    }
+  },
+  "info": {
+    "title": "api-home-library API",
+    "description": "API Home Library | [swagger.json](/docs/home-library/swagger.json) | [swagger-2.0.json](/docs/home-library/swagger-2.0.json)",
+    "version": "1.0.0",
+    "contact": {}
+  },
+  "tags": [],
+  "servers": [
+    {
+      "url": "http://127.0.0.1:4000"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "access-token": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "access-token"
+      }
+    },
+    "schemas": {
+      "CreateUserDto": {
+        "type": "object",
+        "properties": {
+          "login": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "login",
+          "password"
+        ]
+      },
+      "UserResDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "login": {
+            "type": "string"
+          },
+          "version": {
+            "type": "number"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "updatedAt": {
+            "format": "date-time",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "login",
+          "version",
+          "createdAt",
+          "updatedAt"
+        ]
+      },
+      "BadRequestRes": {
+        "type": "object",
+        "properties": {
+          "statusCode": {
+            "type": "number",
+            "example": 400
+          },
+          "message": {
+            "type": "string",
+            "example": "Bad Request"
+          },
+          "timestamp": {
+            "format": "date-time",
+            "type": "string",
+            "example": "2024-02-22T07:26:18.708Z"
+          },
+          "path": {
+            "type": "string",
+            "example": "/api/home-library/users"
+          }
+        },
+        "required": [
+          "statusCode",
+          "message",
+          "timestamp",
+          "path"
+        ]
+      },
+      "ForbiddenRes": {
+        "type": "object",
+        "properties": {
+          "statusCode": {
+            "type": "number",
+            "example": 403
+          },
+          "message": {
+            "type": "string",
+            "example": "Forbidden"
+          },
+          "timestamp": {
+            "format": "date-time",
+            "type": "string",
+            "example": "2024-02-22T07:26:18.708Z"
+          },
+          "path": {
+            "type": "string",
+            "example": "/api/home-library/users"
+          }
+        },
+        "required": [
+          "statusCode",
+          "message",
+          "timestamp",
+          "path"
+        ]
+      },
+      "NotFoundRes": {
+        "type": "object",
+        "properties": {
+          "statusCode": {
+            "type": "number",
+            "example": 404
+          },
+          "message": {
+            "type": "string",
+            "example": "Not Found"
+          },
+          "timestamp": {
+            "format": "date-time",
+            "type": "string",
+            "example": "2024-02-22T07:26:18.708Z"
+          },
+          "path": {
+            "type": "string",
+            "example": "/api/home-library/users"
+          }
+        },
+        "required": [
+          "statusCode",
+          "message",
+          "timestamp",
+          "path"
+        ]
+      },
+      "InternalServerErrorRes": {
+        "type": "object",
+        "properties": {
+          "statusCode": {
+            "type": "number",
+            "example": 500
+          },
+          "message": {
+            "type": "string",
+            "example": "Internal Server Error"
+          },
+          "timestamp": {
+            "format": "date-time",
+            "type": "string",
+            "example": "2024-02-22T07:26:18.708Z"
+          },
+          "path": {
+            "type": "string",
+            "example": "/api/home-library/users"
+          }
+        },
+        "required": [
+          "statusCode",
+          "message",
+          "timestamp",
+          "path"
+        ]
+      },
+      "UpdatePasswordDto": {
+        "type": "object",
+        "properties": {
+          "oldPassword": {
+            "type": "string"
+          },
+          "newPassword": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "oldPassword",
+          "newPassword"
+        ]
+      },
+      "CreateArtistDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "grammy": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "name",
+          "grammy"
+        ]
+      },
+      "ArtistDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "grammy": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "grammy"
+        ]
+      },
+      "UpdateArtistDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "grammy": {
+            "type": "boolean"
+          }
+        }
+      }
+    }
+  }
+}
