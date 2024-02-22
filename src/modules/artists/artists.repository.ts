@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { IArtist, IUpdateArtist } from './artist.interface';
+import { IArtist, IUpdateArtist } from './artists.interface';
 
 @Injectable()
 export class ArtistsRepository {
@@ -13,17 +13,6 @@ export class ArtistsRepository {
   findById(id: string): IArtist {
     return this.artistModel.find((artist) => artist.id === id);
   }
-
-  // find(query: Partial<IUser>): IUser[] {
-  //   return this.userModel.filter((user) => {
-  //     for (const key in query) {
-  //       if (!user[key] === query[key]) {
-  //         false;
-  //       }
-  //     }
-  //     return true;
-  //   });
-  // }
 
   findAll(): IArtist[] {
     return this.artistModel;

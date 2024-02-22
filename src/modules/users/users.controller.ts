@@ -11,7 +11,7 @@ import {
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { CreateUserDto, UpdatePasswordDto, UserResDto } from './users.dto';
+import { CreateUserDto, UpdatePasswordDto, UserDto } from './users.dto';
 import {
   BadRequestRes,
   ForbiddenRes,
@@ -28,7 +28,7 @@ export class UsersController {
   @ApiResponse({
     status: HttpStatus.CREATED,
     description: 'Create a new user',
-    type: UserResDto,
+    type: UserDto,
   })
   @ApiResponse({
     status: HttpStatus.BAD_REQUEST,
@@ -54,7 +54,7 @@ export class UsersController {
     operationId: 'createUser',
     description: 'Create a new user',
   })
-  createUser(@Body() data: CreateUserDto): UserResDto {
+  createUser(@Body() data: CreateUserDto): UserDto {
     return this.usersService.createUser(data);
   }
 
@@ -62,7 +62,7 @@ export class UsersController {
   @ApiResponse({
     status: HttpStatus.OK,
     description: 'Get all users',
-    type: [UserResDto],
+    type: [UserDto],
   })
   @ApiResponse({
     status: HttpStatus.BAD_REQUEST,
@@ -88,7 +88,7 @@ export class UsersController {
     operationId: 'getALLUsers',
     description: 'Get all users',
   })
-  getAllUsers(): UserResDto[] {
+  getAllUsers(): UserDto[] {
     return this.usersService.getAllUsers();
   }
 
@@ -96,7 +96,7 @@ export class UsersController {
   @ApiResponse({
     status: HttpStatus.OK,
     description: 'Get user by id',
-    type: UserResDto,
+    type: UserDto,
   })
   @ApiResponse({
     status: HttpStatus.BAD_REQUEST,
@@ -122,7 +122,7 @@ export class UsersController {
     operationId: 'getUserById',
     description: 'Get user by id',
   })
-  getUserById(@Param('id') id: string): UserResDto {
+  getUserById(@Param('id') id: string): UserDto {
     return this.usersService.getUserById(id);
   }
 
@@ -130,7 +130,7 @@ export class UsersController {
   @ApiResponse({
     status: HttpStatus.OK,
     description: 'Update password for user',
-    type: UserResDto,
+    type: UserDto,
   })
   @ApiResponse({
     status: HttpStatus.BAD_REQUEST,
@@ -156,7 +156,7 @@ export class UsersController {
     operationId: 'updatePassword',
     description: 'Update password for user',
   })
-  updatePassword(@Param('id') id: string, @Body() data: UpdatePasswordDto): UserResDto {
+  updatePassword(@Param('id') id: string, @Body() data: UpdatePasswordDto): UserDto {
     return this.usersService.updatePassword(id, data);
   }
 

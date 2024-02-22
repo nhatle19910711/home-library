@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { ICreateUser, IUpdatePassword, IUserRes } from './users.interface';
+import { ICreateUser, IUpdatePassword, IUser } from './users.interface';
 import { IsNotEmpty, IsString } from 'class-validator';
-import { Transform } from 'class-transformer';
+import { Exclude, Transform } from 'class-transformer';
 
 export class CreateUserDto implements ICreateUser {
   @ApiProperty({
@@ -23,7 +23,7 @@ export class CreateUserDto implements ICreateUser {
   password: string;
 }
 
-export class UserResDto implements IUserRes {
+export class UserDto implements IUser {
   @ApiProperty({
     type: String,
   })
@@ -33,6 +33,12 @@ export class UserResDto implements IUserRes {
     type: String,
   })
   login: string;
+
+  @ApiProperty({
+    type: String,
+  })
+  @Exclude()
+  password: string;
 
   @ApiProperty({
     type: Number,
@@ -48,6 +54,10 @@ export class UserResDto implements IUserRes {
     type: Date,
   })
   updatedAt: Date;
+
+  constructor(data: Partial<UserDto>) {
+    Object.assign(this, data);
+  }
 }
 
 export class UpdatePasswordDto implements IUpdatePassword {
