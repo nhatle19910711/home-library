@@ -17,7 +17,7 @@ import {
   ForbiddenRes,
   InternalServerErrorRes,
   NotFoundRes,
-} from '../../shared/error.response';
+} from '../../base/error.response';
 
 @Controller('users')
 @ApiTags('Users')

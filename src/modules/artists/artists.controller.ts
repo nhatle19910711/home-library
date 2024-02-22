@@ -1,13 +1,23 @@
-import { Body, Controller, Get, HttpStatus, Param, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  HttpCode,
+  HttpStatus,
+  Param,
+  Post,
+  Put,
+} from '@nestjs/common';
 import { ArtistsService } from './artists.service';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { ArtistDto, CreateArtistDto } from './artists.dto';
+import { ArtistDto, CreateArtistDto, UpdateArtistDto } from './artists.dto';
 import {
   BadRequestRes,
   ForbiddenRes,
   InternalServerErrorRes,
   NotFoundRes,
-} from '../../shared/error.response';
+} from '../../base/error.response';
 
 @Controller('artists')
 @ApiTags('Artists')
@@ -114,5 +124,74 @@ export class ArtistsController {
   })
   getArtistById(@Param('id') id: string): ArtistDto {
     return this.artistsService.getArtistById(id);
+  }
+
+  @Put(':id')
+  @ApiResponse({
+    status: HttpStatus.OK,
+    description: 'Update artist',
+    type: ArtistDto,
+  })
+  @ApiResponse({
+    status: HttpStatus.BAD_REQUEST,
+    description: 'Update artist',
+    type: BadRequestRes,
+  })
+  @ApiResponse({
+    status: HttpStatus.INTERNAL_SERVER_ERROR,
+    description: 'Update artist',
+    type: InternalServerErrorRes,
+  })
+  @ApiResponse({
+    status: HttpStatus.NOT_FOUND,
+    description: 'Update artist',
+    type: NotFoundRes,
+  })
+  @ApiResponse({
+    status: HttpStatus.FORBIDDEN,
+    description: 'Update artist',
+    type: ForbiddenRes,
+  })
+  @ApiOperation({
+    operationId: 'updateArtist',
+    description: 'Update artist',
+  })
+  updateArtist(@Param('id') id: string, @Body() data: UpdateArtistDto): ArtistDto {
+    return this.artistsService.updateArtist(id, data);
+  }
+
+  @Delete(':id')
+  @HttpCode(HttpStatus.NO_CONTENT)
+  @ApiResponse({
+    status: HttpStatus.OK,
+    description: 'Delete artist',
+    type: ArtistDto,
+  })
+  @ApiResponse({
+    status: HttpStatus.BAD_REQUEST,
+    description: 'Delete artist',
+    type: BadRequestRes,
+  })
+  @ApiResponse({
+    status: HttpStatus.INTERNAL_SERVER_ERROR,
+    description: 'Delete artist',
+    type: InternalServerErrorRes,
+  })
+  @ApiResponse({
+    status: HttpStatus.NOT_FOUND,
+    description: 'Delete artist',
+    type: NotFoundRes,
+  })
+  @ApiResponse({
+    status: HttpStatus.FORBIDDEN,
+    description: 'Delete artist',
+    type: ForbiddenRes,
+  })
+  @ApiOperation({
+    operationId: 'deleteArtist',
+    description: 'Delete artist',
+  })
+  deleteArtist(@Param('id') id: string): void {
+    return this.artistsService.deleteArtist(id);
   }
 }

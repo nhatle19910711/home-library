@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { IArtist } from './artist.interface';
+import { IArtist, IUpdateArtist } from './artist.interface';
 
 @Injectable()
 export class ArtistsRepository {
@@ -29,21 +29,15 @@ export class ArtistsRepository {
     return this.artistModel;
   }
 
-  //   updatePassword(id: string, password: string) {
-  //     const index = this.userModel.findIndex((user) => user.id === id);
+  update(id: string, data: IUpdateArtist): IArtist {
+    const index = this.artistModel.findIndex((artist) => artist.id === id);
+    this.artistModel[index] = { ...this.artistModel[index], ...data };
+    return this.artistModel[index];
+  }
 
-  //     this.userModel[index] = {
-  //       ...this.userModel[index],
-  //       password: password,
-  //       version: this.userModel[index].version + 1,
-  //       updatedAt: new Date(),
-  //     };
-  //     return this.userModel[index];
-  //   }
+  deleteById(id: string): void {
+    const index = this.artistModel.findIndex((artist) => artist.id === id);
 
-  //   deleteById(id: string): void {
-  //     const index = this.userModel.findIndex((user) => user.id === id);
-
-  //     this.userModel.splice(index, 1);
-  //   }
+    this.artistModel.splice(index, 1);
+  }
 }

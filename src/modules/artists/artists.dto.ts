@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IArtist, ICreateArtist } from './artist.interface';
-import { IsBoolean, IsDefined, IsOptional, IsString } from 'class-validator';
+import { IArtist, ICreateArtist, IUpdateArtist } from './artist.interface';
+import { IsBoolean, IsDefined, IsNotEmpty, IsOptional, IsString } from 'class-validator';
 import { Transform } from 'class-transformer';
 
 export class ArtistDto implements IArtist {
@@ -26,7 +26,7 @@ export class CreateArtistDto implements ICreateArtist {
     required: true,
   })
   @IsString()
-  @IsOptional()
+  @IsNotEmpty()
   @Transform((o) => o?.value?.trim())
   name: string;
 
@@ -37,4 +37,22 @@ export class CreateArtistDto implements ICreateArtist {
   @IsBoolean()
   @IsDefined()
   grammy: boolean;
+}
+
+export class UpdateArtistDto implements IUpdateArtist {
+  @ApiProperty({
+    type: String,
+    required: false,
+  })
+  @IsString()
+  @IsOptional()
+  name?: string;
+
+  @ApiProperty({
+    type: Boolean,
+    required: false,
+  })
+  @IsBoolean()
+  @IsOptional()
+  grammy?: boolean;
 }
