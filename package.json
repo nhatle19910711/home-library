@@ -37,7 +37,7 @@
     "reflect-metadata": "^0.1.13",
     "response-time": "^2.3.2",
     "rxjs": "^7.8.1",
-    "uuid": "^9.0.0"
+    "uuid": "^9.0.1"
   },
   "devDependencies": {
     "@nestjs/cli": "^10.0.0",
@@ -74,7 +74,10 @@
       "^.+\\.(t|j)s$": "ts-jest"
     },
     "collectCoverageFrom": [
-      "**/*.(t|j)s"
+      "<rootDir>/**/*.ts",
+      "!**/node_modules/**",
+      "!<rootDir>/src/modules/**/*.module.ts",
+      "!<rootDir>/**/*.entity.ts"
     ],
     "modulePathIgnorePatterns": [
       "<rootDir>/dist/"
@@ -85,12 +88,6 @@
       "text",
       "text-summary",
       "json-summary"
-    ],
-    "collectCoverageFrom": [
-      "<rootDir>/**/*.ts",
-      "!**/node_modules/**",
-      "!<rootDir>/src/modules/**/*.module.ts",
-      "!<rootDir>/**/*.entity.ts"
     ],
     "coveragePathIgnorePatterns": [
       "<rootDir>/src/shared",

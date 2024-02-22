@@ -11,5 +11,3 @@ server:
   port: 4000
   hostname: 127.0.0.1:4000
   swaggerSchema: http
-
-NODE_ENV: development
