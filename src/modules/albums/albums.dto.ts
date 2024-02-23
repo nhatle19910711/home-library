@@ -4,7 +4,6 @@ import {
   IsDefined,
   IsInt,
   IsNotEmpty,
-  IsNumber,
   IsOptional,
   IsString,
   Max,
@@ -58,14 +57,13 @@ export class CreateAlbumDto implements ICreateAlbum {
 
   @ApiProperty({
     type: String,
-    nullable: true,
     required: true,
   })
   @IsString()
+  @IsOptional()
   @IsNotEmpty()
-  @ValidateIf((object, value) => value !== null)
   @Transform((o) => o?.value?.trim())
-  artistId: string | null;
+  artistId?: string;
 }
 
 export class UpdateAlbumDto implements IUpdateAlbum {
@@ -93,8 +91,7 @@ export class UpdateAlbumDto implements IUpdateAlbum {
     required: false,
   })
   @IsString()
-  @IsNotEmpty()
-  @ValidateIf((object, value) => value !== null)
+  @IsOptional()
   @Transform((o) => o?.value?.trim())
-  artistId?: string | null;
+  artistId?: string;
 }

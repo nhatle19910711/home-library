@@ -163,9 +163,8 @@ export class ArtistsController {
   @Delete(':id')
   @HttpCode(HttpStatus.NO_CONTENT)
   @ApiResponse({
-    status: HttpStatus.OK,
+    status: HttpStatus.NO_CONTENT,
     description: 'Delete artist',
-    type: ArtistDto,
   })
   @ApiResponse({
     status: HttpStatus.BAD_REQUEST,
