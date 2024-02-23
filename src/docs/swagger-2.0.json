@@ -819,6 +819,274 @@
           "application/json"
         ]
       }
+    },
+    "/api/home-library/tracks": {
+      "post": {
+        "operationId": "createTrack",
+        "summary": "",
+        "description": "Create a new track",
+        "parameters": [
+          {
+            "required": true,
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/CreateTrackDto"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Create a new track",
+            "schema": {
+              "$ref": "#/definitions/TrackDto"
+            }
+          },
+          "400": {
+            "description": "Create a new track",
+            "schema": {
+              "$ref": "#/definitions/BadRequestRes"
+            }
+          },
+          "403": {
+            "description": "Create a new track",
+            "schema": {
+              "$ref": "#/definitions/ForbiddenRes"
+            }
+          },
+          "404": {
+            "description": "Create a new track",
+            "schema": {
+              "$ref": "#/definitions/NotFoundRes"
+            }
+          },
+          "500": {
+            "description": "Create a new track",
+            "schema": {
+              "$ref": "#/definitions/InternalServerErrorRes"
+            }
+          }
+        },
+        "tags": [
+          "Tracks"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ]
+      },
+      "get": {
+        "operationId": "getAllTracks",
+        "summary": "",
+        "description": "Get all tracks",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Get all tracks",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/TrackDto"
+              }
+            }
+          },
+          "400": {
+            "description": "Get all tracks",
+            "schema": {
+              "$ref": "#/definitions/BadRequestRes"
+            }
+          },
+          "403": {
+            "description": "Get all tracks",
+            "schema": {
+              "$ref": "#/definitions/ForbiddenRes"
+            }
+          },
+          "404": {
+            "description": "Get all tracks",
+            "schema": {
+              "$ref": "#/definitions/NotFoundRes"
+            }
+          },
+          "500": {
+            "description": "Get all tracks",
+            "schema": {
+              "$ref": "#/definitions/InternalServerErrorRes"
+            }
+          }
+        },
+        "tags": [
+          "Tracks"
+        ],
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/api/home-library/tracks/{id}": {
+      "get": {
+        "operationId": "getTrackById",
+        "summary": "",
+        "description": "Get track by id",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get track by id",
+            "schema": {
+              "$ref": "#/definitions/TrackDto"
+            }
+          },
+          "400": {
+            "description": "Get track by id",
+            "schema": {
+              "$ref": "#/definitions/BadRequestRes"
+            }
+          },
+          "403": {
+            "description": "Get track by id",
+            "schema": {
+              "$ref": "#/definitions/ForbiddenRes"
+            }
+          },
+          "404": {
+            "description": "Get track by id",
+            "schema": {
+              "$ref": "#/definitions/NotFoundRes"
+            }
+          },
+          "500": {
+            "description": "Get track by id",
+            "schema": {
+              "$ref": "#/definitions/InternalServerErrorRes"
+            }
+          }
+        },
+        "tags": [
+          "Tracks"
+        ],
+        "produces": [
+          "application/json"
+        ]
+      },
+      "put": {
+        "operationId": "updateTrack",
+        "summary": "",
+        "description": "Update track",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "type": "string"
+          },
+          {
+            "required": true,
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/UpdateTrackDto"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update track",
+            "schema": {
+              "$ref": "#/definitions/TrackDto"
+            }
+          },
+          "400": {
+            "description": "Update track",
+            "schema": {
+              "$ref": "#/definitions/BadRequestRes"
+            }
+          },
+          "403": {
+            "description": "Update track",
+            "schema": {
+              "$ref": "#/definitions/ForbiddenRes"
+            }
+          },
+          "404": {
+            "description": "Update track",
+            "schema": {
+              "$ref": "#/definitions/NotFoundRes"
+            }
+          },
+          "500": {
+            "description": "Update track",
+            "schema": {
+              "$ref": "#/definitions/InternalServerErrorRes"
+            }
+          }
+        },
+        "tags": [
+          "Tracks"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ]
+      },
+      "delete": {
+        "operationId": "deleteTrack",
+        "summary": "",
+        "description": "Delete track",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Delete track"
+          },
+          "400": {
+            "description": "Delete track",
+            "schema": {
+              "$ref": "#/definitions/BadRequestRes"
+            }
+          },
+          "403": {
+            "description": "Delete track",
+            "schema": {
+              "$ref": "#/definitions/ForbiddenRes"
+            }
+          },
+          "404": {
+            "description": "Delete track",
+            "schema": {
+              "$ref": "#/definitions/NotFoundRes"
+            }
+          },
+          "500": {
+            "description": "Delete track",
+            "schema": {
+              "$ref": "#/definitions/InternalServerErrorRes"
+            }
+          }
+        },
+        "tags": [
+          "Tracks"
+        ],
+        "produces": [
+          "application/json"
+        ]
+      }
     }
   },
   "info": {
@@ -1110,6 +1378,73 @@
         "artistId": {
           "type": "string",
           "x-nullable": true
+        }
+      }
+    },
+    "CreateTrackDto": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "artistId": {
+          "type": "string"
+        },
+        "albumId": {
+          "type": "string"
+        },
+        "duration": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "name",
+        "duration"
+      ]
+    },
+    "TrackDto": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "artistId": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "albumId": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "duration": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "artistId",
+        "albumId",
+        "duration"
+      ]
+    },
+    "UpdateTrackDto": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "artistId": {
+          "type": "string"
+        },
+        "albumId": {
+          "type": "string"
+        },
+        "duration": {
+          "type": "number"
         }
       }
     }
