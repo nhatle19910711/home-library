@@ -10,6 +10,7 @@ import { IAlbum, ICreateAlbum, IUpdateAlbum } from './albums.interface';
 import { ArtistsService } from '../artists/artists.service';
 import { v4 as uuidV4, validate } from 'uuid';
 import { TracksService } from '../tracks/tracks.service';
+import { FavoritesService } from '../favorites/favorites.service';
 
 @Injectable()
 export class AlbumsService {
@@ -19,6 +20,8 @@ export class AlbumsService {
     private artistsService: ArtistsService,
     @Inject(forwardRef(() => ArtistsService))
     private tracksService: TracksService,
+    @Inject(forwardRef(() => FavoritesService))
+    private readonly favoritesService: FavoritesService,
   ) {}
 
   createAlbum(data: ICreateAlbum): IAlbum {
@@ -95,6 +98,9 @@ export class AlbumsService {
     }
 
     this.tracksService.updateTracks({ albumId: album.id }, { albumId: null });
+    try {
+      this.favoritesService.deleteAlbumFromFavorites(id);
+    } catch (error) {}
 
     this.repo.deleteById(id);
   }

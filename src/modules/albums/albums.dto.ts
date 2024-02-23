@@ -1,15 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IAlbum, ICreateAlbum, IUpdateAlbum } from './albums.interface';
-import {
-  IsDefined,
-  IsInt,
-  IsNotEmpty,
-  IsOptional,
-  IsString,
-  Max,
-  Min,
-  ValidateIf,
-} from 'class-validator';
+import { IsDefined, IsInt, IsNotEmpty, IsOptional, IsString, Max, Min } from 'class-validator';
 import { Transform } from 'class-transformer';
 
 export class AlbumDto implements IAlbum {

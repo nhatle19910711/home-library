@@ -34,9 +34,6 @@ export class UserDto implements IUser {
   })
   login: string;
 
-  @ApiProperty({
-    type: String,
-  })
   @Exclude()
   password: string;
 

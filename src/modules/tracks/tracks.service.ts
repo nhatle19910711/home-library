@@ -10,6 +10,7 @@ import { ArtistsService } from '../artists/artists.service';
 import { ICreateTrack, ITrack, IUpdateTrack } from './tracks.interface';
 import { AlbumsService } from '../albums/albums.service';
 import { v4 as uuidV4, validate } from 'uuid';
+import { FavoritesService } from '../favorites/favorites.service';
 
 @Injectable()
 export class TracksService {
@@ -19,6 +20,8 @@ export class TracksService {
     private readonly albumsService: AlbumsService,
     @Inject(forwardRef(() => ArtistsService))
     private readonly artistsService: ArtistsService,
+    @Inject(forwardRef(() => FavoritesService))
+    private readonly favoritesService: FavoritesService,
   ) {}
 
   createTrack(data: ICreateTrack): ITrack {
@@ -116,6 +119,10 @@ export class TracksService {
     if (!track) {
       throw new NotFoundException('Track is not found');
     }
+
+    try {
+      this.favoritesService.deleteTrackFromFavorites(id);
+    } catch (error) {}
 
     this.repo.deleteById(id);
   }
