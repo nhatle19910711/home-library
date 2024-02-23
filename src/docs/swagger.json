@@ -306,7 +306,7 @@
         ]
       },
       "delete": {
-        "operationId": "updatePassword",
+        "operationId": "deleteUser",
         "summary": "",
         "description": "Delete user",
         "parameters": [
@@ -672,15 +672,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Delete artist",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ArtistDto"
-                }
-              }
-            }
+          "204": {
+            "description": "Delete artist"
           },
           "400": {
             "description": "Delete artist",
@@ -795,7 +788,10 @@
               }
             }
           }
-        }
+        },
+        "tags": [
+          "Albums"
+        ]
       },
       "get": {
         "operationId": "getAllAlbums",
@@ -856,7 +852,10 @@
               }
             }
           }
-        }
+        },
+        "tags": [
+          "Albums"
+        ]
       }
     },
     "/api/home-library/albums/{id}": {
@@ -925,7 +924,153 @@
               }
             }
           }
-        }
+        },
+        "tags": [
+          "Albums"
+        ]
+      },
+      "put": {
+        "operationId": "updateAlbum",
+        "summary": "",
+        "description": "Update album",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateAlbumDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Update album",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AlbumDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Update album",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestRes"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Update album",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForbiddenRes"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Update album",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundRes"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Update album",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InternalServerErrorRes"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Albums"
+        ]
+      },
+      "delete": {
+        "operationId": "deleteAlbum",
+        "summary": "",
+        "description": "Delete album",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Delete album"
+          },
+          "400": {
+            "description": "Delete album",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestRes"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Delete album",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForbiddenRes"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Delete album",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundRes"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Delete album",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InternalServerErrorRes"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Albums"
+        ]
       }
     }
   },
@@ -1180,8 +1325,7 @@
             "type": "number"
           },
           "artistId": {
-            "type": "string",
-            "nullable": true
+            "type": "string"
           }
         },
         "required": [
@@ -1213,6 +1357,21 @@
           "year",
           "artistId"
         ]
+      },
+      "UpdateAlbumDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "year": {
+            "type": "number"
+          },
+          "artistId": {
+            "type": "string",
+            "nullable": true
+          }
+        }
       }
     }
   }

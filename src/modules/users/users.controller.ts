@@ -187,7 +187,7 @@ export class UsersController {
     type: ForbiddenRes,
   })
   @ApiOperation({
-    operationId: 'updatePassword',
+    operationId: 'deleteUser',
     description: 'Delete user',
   })
   deleteUser(@Param('id') id: string): void {

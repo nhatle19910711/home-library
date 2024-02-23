@@ -236,7 +236,7 @@
         ]
       },
       "delete": {
-        "operationId": "updatePassword",
+        "operationId": "deleteUser",
         "summary": "",
         "description": "Delete user",
         "parameters": [
@@ -516,11 +516,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Delete artist",
-            "schema": {
-              "$ref": "#/definitions/ArtistDto"
-            }
+          "204": {
+            "description": "Delete artist"
           },
           "400": {
             "description": "Delete artist",
@@ -602,6 +599,9 @@
             }
           }
         },
+        "tags": [
+          "Albums"
+        ],
         "consumes": [
           "application/json"
         ],
@@ -649,6 +649,9 @@
             }
           }
         },
+        "tags": [
+          "Albums"
+        ],
         "produces": [
           "application/json"
         ]
@@ -699,6 +702,119 @@
             }
           }
         },
+        "tags": [
+          "Albums"
+        ],
+        "produces": [
+          "application/json"
+        ]
+      },
+      "put": {
+        "operationId": "updateAlbum",
+        "summary": "",
+        "description": "Update album",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "type": "string"
+          },
+          {
+            "required": true,
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/UpdateAlbumDto"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update album",
+            "schema": {
+              "$ref": "#/definitions/AlbumDto"
+            }
+          },
+          "400": {
+            "description": "Update album",
+            "schema": {
+              "$ref": "#/definitions/BadRequestRes"
+            }
+          },
+          "403": {
+            "description": "Update album",
+            "schema": {
+              "$ref": "#/definitions/ForbiddenRes"
+            }
+          },
+          "404": {
+            "description": "Update album",
+            "schema": {
+              "$ref": "#/definitions/NotFoundRes"
+            }
+          },
+          "500": {
+            "description": "Update album",
+            "schema": {
+              "$ref": "#/definitions/InternalServerErrorRes"
+            }
+          }
+        },
+        "tags": [
+          "Albums"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ]
+      },
+      "delete": {
+        "operationId": "deleteAlbum",
+        "summary": "",
+        "description": "Delete album",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Delete album"
+          },
+          "400": {
+            "description": "Delete album",
+            "schema": {
+              "$ref": "#/definitions/BadRequestRes"
+            }
+          },
+          "403": {
+            "description": "Delete album",
+            "schema": {
+              "$ref": "#/definitions/ForbiddenRes"
+            }
+          },
+          "404": {
+            "description": "Delete album",
+            "schema": {
+              "$ref": "#/definitions/NotFoundRes"
+            }
+          },
+          "500": {
+            "description": "Delete album",
+            "schema": {
+              "$ref": "#/definitions/InternalServerErrorRes"
+            }
+          }
+        },
+        "tags": [
+          "Albums"
+        ],
         "produces": [
           "application/json"
         ]
@@ -949,8 +1065,7 @@
           "type": "number"
         },
         "artistId": {
-          "type": "string",
-          "x-nullable": true
+          "type": "string"
         }
       },
       "required": [
@@ -982,6 +1097,21 @@
         "year",
         "artistId"
       ]
+    },
+    "UpdateAlbumDto": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "year": {
+          "type": "number"
+        },
+        "artistId": {
+          "type": "string",
+          "x-nullable": true
+        }
+      }
     }
   },
   "securityDefinitions": {

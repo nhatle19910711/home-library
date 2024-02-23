@@ -13,8 +13,12 @@ export class AlbumsService {
 
   createAlbum(data: ICreateAlbum): IAlbum {
     if (data.artistId) {
-      const artist = this.artistsService.getArtistById(data.artistId);
-      if (!artist) {
+      try {
+        const artist = this.artistsService.getArtistById(data.artistId);
+        if (!artist) {
+          throw new BadRequestException('artistId is invalid');
+        }
+      } catch (error) {
         throw new BadRequestException('artistId is invalid');
       }
     }
@@ -22,6 +26,7 @@ export class AlbumsService {
     const newAlbum: IAlbum = {
       id: uuidV4().toString(),
       ...data,
+      artistId: data.artistId ? data.artistId : null,
     };
 
     return this.repo.create(newAlbum);
@@ -53,12 +58,28 @@ export class AlbumsService {
     }
 
     if (data.artistId) {
-      const artist = this.artistsService.getArtistById(data.artistId);
-      if (!artist) {
+      try {
+        const artist = this.artistsService.getArtistById(data.artistId);
+        if (!artist) {
+          throw new BadRequestException('artistId is invalid');
+        }
+      } catch (error) {
         throw new BadRequestException('artistId is invalid');
       }
     }
 
     return this.repo.update(id, data);
+  }
+
+  deleteAlbum(id: string): void {
+    if (!validate(id)) {
+      throw new BadRequestException('Id is invalid');
+    }
+    const album = this.repo.findById(id);
+    if (!album) {
+      throw new NotFoundException('Album is not found');
+    }
+
+    this.repo.deleteById(id);
   }
 }

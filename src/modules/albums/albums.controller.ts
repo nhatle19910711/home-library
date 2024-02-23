@@ -1,7 +1,17 @@
-import { Body, Controller, Get, HttpStatus, Param, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  HttpCode,
+  HttpStatus,
+  Param,
+  Post,
+  Put,
+} from '@nestjs/common';
 import { AlbumsService } from './albums.service';
-import { ApiOperation, ApiResponse } from '@nestjs/swagger';
-import { AlbumDto, CreateAlbumDto } from './albums.dto';
+import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { AlbumDto, CreateAlbumDto, UpdateAlbumDto } from './albums.dto';
 import {
   BadRequestRes,
   ForbiddenRes,
@@ -10,6 +20,7 @@ import {
 } from '../../base/error.response';
 
 @Controller('albums')
+@ApiTags('Albums')
 export class AlbumsController {
   constructor(private readonly albumsService: AlbumsService) {}
 
@@ -113,5 +124,73 @@ export class AlbumsController {
   })
   getAlbumById(@Param('id') id: string): AlbumDto {
     return this.albumsService.getAlbumById(id);
+  }
+
+  @Put(':id')
+  @ApiResponse({
+    status: HttpStatus.OK,
+    description: 'Update album',
+    type: AlbumDto,
+  })
+  @ApiResponse({
+    status: HttpStatus.BAD_REQUEST,
+    description: 'Update album',
+    type: BadRequestRes,
+  })
+  @ApiResponse({
+    status: HttpStatus.INTERNAL_SERVER_ERROR,
+    description: 'Update album',
+    type: InternalServerErrorRes,
+  })
+  @ApiResponse({
+    status: HttpStatus.NOT_FOUND,
+    description: 'Update album',
+    type: NotFoundRes,
+  })
+  @ApiResponse({
+    status: HttpStatus.FORBIDDEN,
+    description: 'Update album',
+    type: ForbiddenRes,
+  })
+  @ApiOperation({
+    operationId: 'updateAlbum',
+    description: 'Update album',
+  })
+  updateAlbum(@Param('id') id: string, @Body() data: UpdateAlbumDto): AlbumDto {
+    return this.albumsService.updateAlbum(id, data);
+  }
+
+  @Delete(':id')
+  @HttpCode(HttpStatus.NO_CONTENT)
+  @ApiResponse({
+    status: HttpStatus.NO_CONTENT,
+    description: 'Delete album',
+  })
+  @ApiResponse({
+    status: HttpStatus.BAD_REQUEST,
+    description: 'Delete album',
+    type: BadRequestRes,
+  })
+  @ApiResponse({
+    status: HttpStatus.INTERNAL_SERVER_ERROR,
+    description: 'Delete album',
+    type: InternalServerErrorRes,
+  })
+  @ApiResponse({
+    status: HttpStatus.NOT_FOUND,
+    description: 'Delete album',
+    type: NotFoundRes,
+  })
+  @ApiResponse({
+    status: HttpStatus.FORBIDDEN,
+    description: 'Delete album',
+    type: ForbiddenRes,
+  })
+  @ApiOperation({
+    operationId: 'deleteAlbum',
+    description: 'Delete album',
+  })
+  deleteAlbum(@Param('id') id: string): void {
+    return this.albumsService.deleteAlbum(id);
   }
 }
