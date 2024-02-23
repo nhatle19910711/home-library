@@ -1,11 +1,25 @@
-import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Inject,
+  Injectable,
+  NotFoundException,
+  forwardRef,
+} from '@nestjs/common';
 import { ArtistsRepository } from './artists.repository';
 import { IArtist, ICreateArtist, IUpdateArtist } from './artists.interface';
 import { v4 as uuidV4, validate } from 'uuid';
+import { AlbumsService } from '../albums/albums.service';
+import { TracksService } from '../tracks/tracks.service';
 
 @Injectable()
 export class ArtistsService {
-  constructor(private readonly repo: ArtistsRepository) {}
+  constructor(
+    private readonly repo: ArtistsRepository,
+    @Inject(forwardRef(() => AlbumsService))
+    private albumsService: AlbumsService,
+    @Inject(forwardRef(() => AlbumsService))
+    private tracksService: TracksService,
+  ) {}
 
   createArtist(data: ICreateArtist): IArtist {
     const newArtist: IArtist = {
@@ -52,6 +66,9 @@ export class ArtistsService {
     if (!artist) {
       throw new NotFoundException('Artist is not found');
     }
+
+    this.albumsService.updateAlbums({ artistId: artist.id }, { artistId: null });
+    this.tracksService.updateTracks({ artistId: artist.id }, { artistId: null });
 
     this.repo.deleteById(id);
   }

@@ -18,7 +18,7 @@ export class BaseRepository<T extends baseEntity> {
     return this.model.filter((entity) => {
       for (const key in query) {
         if (!entity[key] === query[key]) {
-          false;
+          return false;
         }
       }
       return true;
@@ -29,6 +29,25 @@ export class BaseRepository<T extends baseEntity> {
     const index = this.model.findIndex((entity) => entity.id === id);
     this.model[index] = { ...this.model[index], ...data };
     return this.model[index];
+  }
+
+  updateMany(query: Partial<T>, data: Record<string, any>): T[] {
+    const entities: T[] = [];
+
+    this.model.forEach((entity, index) => {
+      let check = true;
+      for (const key in query) {
+        if (!(entity[key] === query[key])) {
+          check = false;
+        }
+      }
+      if (check) {
+        this.model[index] = { ...entity, ...data };
+        entities.push(this.model[index]);
+      }
+    });
+
+    return entities;
   }
 
   findAll(): T[] {

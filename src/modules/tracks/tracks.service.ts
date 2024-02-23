@@ -1,4 +1,10 @@
-import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Inject,
+  Injectable,
+  NotFoundException,
+  forwardRef,
+} from '@nestjs/common';
 import { TracksRepository } from './tracks.repository';
 import { ArtistsService } from '../artists/artists.service';
 import { ICreateTrack, ITrack, IUpdateTrack } from './tracks.interface';
@@ -9,7 +15,9 @@ import { v4 as uuidV4, validate } from 'uuid';
 export class TracksService {
   constructor(
     private readonly repo: TracksRepository,
+    @Inject(forwardRef(() => AlbumsService))
     private readonly albumsService: AlbumsService,
+    @Inject(forwardRef(() => ArtistsService))
     private readonly artistsService: ArtistsService,
   ) {}
 
@@ -94,6 +102,10 @@ export class TracksService {
     }
 
     return this.repo.update(id, data);
+  }
+
+  updateTracks(query: Partial<ITrack>, data: IUpdateTrack): ITrack[] {
+    return this.repo.updateMany(query, data);
   }
 
   deleteTrack(id: string): void {

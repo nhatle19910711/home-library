@@ -1,14 +1,24 @@
-import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Inject,
+  Injectable,
+  NotFoundException,
+  forwardRef,
+} from '@nestjs/common';
 import { AlbumsRepository } from './albums.repository';
 import { IAlbum, ICreateAlbum, IUpdateAlbum } from './albums.interface';
 import { ArtistsService } from '../artists/artists.service';
 import { v4 as uuidV4, validate } from 'uuid';
+import { TracksService } from '../tracks/tracks.service';
 
 @Injectable()
 export class AlbumsService {
   constructor(
     private readonly repo: AlbumsRepository,
-    private readonly artistsService: ArtistsService,
+    @Inject(forwardRef(() => ArtistsService))
+    private artistsService: ArtistsService,
+    @Inject(forwardRef(() => ArtistsService))
+    private tracksService: TracksService,
   ) {}
 
   createAlbum(data: ICreateAlbum): IAlbum {
@@ -71,6 +81,10 @@ export class AlbumsService {
     return this.repo.update(id, data);
   }
 
+  updateAlbums(query: Partial<IAlbum>, data: IUpdateAlbum): IAlbum[] {
+    return this.repo.updateMany(query, data);
+  }
+
   deleteAlbum(id: string): void {
     if (!validate(id)) {
       throw new BadRequestException('Id is invalid');
@@ -79,6 +93,8 @@ export class AlbumsService {
     if (!album) {
       throw new NotFoundException('Album is not found');
     }
+
+    this.tracksService.updateTracks({ albumId: album.id }, { albumId: null });
 
     this.repo.deleteById(id);
   }
