@@ -1087,6 +1087,355 @@
           "application/json"
         ]
       }
+    },
+    "/api/home-library/favs": {
+      "get": {
+        "operationId": "getAllFavorites",
+        "summary": "",
+        "description": "Get all favorites",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Get all favorites",
+            "schema": {
+              "$ref": "#/definitions/FavoritesResDto"
+            }
+          },
+          "400": {
+            "description": "Get all favorites",
+            "schema": {
+              "$ref": "#/definitions/BadRequestRes"
+            }
+          },
+          "403": {
+            "description": "Get all favorites",
+            "schema": {
+              "$ref": "#/definitions/ForbiddenRes"
+            }
+          },
+          "404": {
+            "description": "Get all favorites",
+            "schema": {
+              "$ref": "#/definitions/NotFoundRes"
+            }
+          },
+          "500": {
+            "description": "Get all favorites",
+            "schema": {
+              "$ref": "#/definitions/InternalServerErrorRes"
+            }
+          }
+        },
+        "tags": [
+          "Favorites"
+        ],
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/api/home-library/favs/track/{id}": {
+      "post": {
+        "operationId": "addTrackToFavorites",
+        "summary": "",
+        "description": "Add track to favorites",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Add track to favorites",
+            "schema": {
+              "$ref": "#/definitions/FavoritesDto"
+            }
+          },
+          "400": {
+            "description": "Add track to favorites",
+            "schema": {
+              "$ref": "#/definitions/BadRequestRes"
+            }
+          },
+          "403": {
+            "description": "Add track to favorites",
+            "schema": {
+              "$ref": "#/definitions/ForbiddenRes"
+            }
+          },
+          "404": {
+            "description": "Add track to favorites",
+            "schema": {
+              "$ref": "#/definitions/NotFoundRes"
+            }
+          },
+          "500": {
+            "description": "Add track to favorites",
+            "schema": {
+              "$ref": "#/definitions/InternalServerErrorRes"
+            }
+          }
+        },
+        "tags": [
+          "Favorites"
+        ],
+        "produces": [
+          "application/json"
+        ]
+      },
+      "delete": {
+        "operationId": "deleteTrackFromFavorites",
+        "summary": "",
+        "description": "Delete track from favorites",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Delete track from favorites"
+          },
+          "400": {
+            "description": "Delete track from favorites",
+            "schema": {
+              "$ref": "#/definitions/BadRequestRes"
+            }
+          },
+          "403": {
+            "description": "Delete track from favorites",
+            "schema": {
+              "$ref": "#/definitions/ForbiddenRes"
+            }
+          },
+          "404": {
+            "description": "Delete track from favorites",
+            "schema": {
+              "$ref": "#/definitions/NotFoundRes"
+            }
+          },
+          "500": {
+            "description": "Delete track from favorites",
+            "schema": {
+              "$ref": "#/definitions/InternalServerErrorRes"
+            }
+          }
+        },
+        "tags": [
+          "Favorites"
+        ],
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/api/home-library/favs/album/{id}": {
+      "post": {
+        "operationId": "addAlbumToFavorites",
+        "summary": "",
+        "description": "Add album to favorites",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Add album to favorites",
+            "schema": {
+              "$ref": "#/definitions/FavoritesDto"
+            }
+          },
+          "400": {
+            "description": "Add album to favorites",
+            "schema": {
+              "$ref": "#/definitions/BadRequestRes"
+            }
+          },
+          "403": {
+            "description": "Add album to favorites",
+            "schema": {
+              "$ref": "#/definitions/ForbiddenRes"
+            }
+          },
+          "404": {
+            "description": "Add album to favorites",
+            "schema": {
+              "$ref": "#/definitions/NotFoundRes"
+            }
+          },
+          "500": {
+            "description": "Add album to favorites",
+            "schema": {
+              "$ref": "#/definitions/InternalServerErrorRes"
+            }
+          }
+        },
+        "tags": [
+          "Favorites"
+        ],
+        "produces": [
+          "application/json"
+        ]
+      },
+      "delete": {
+        "operationId": "deleteAlbumFromFavorites",
+        "summary": "",
+        "description": "Delete album from favorites",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Delete album from favorites"
+          },
+          "400": {
+            "description": "Delete album from favorites",
+            "schema": {
+              "$ref": "#/definitions/BadRequestRes"
+            }
+          },
+          "403": {
+            "description": "Delete album from favorites",
+            "schema": {
+              "$ref": "#/definitions/ForbiddenRes"
+            }
+          },
+          "404": {
+            "description": "Delete album from favorites",
+            "schema": {
+              "$ref": "#/definitions/NotFoundRes"
+            }
+          },
+          "500": {
+            "description": "Delete album from favorites",
+            "schema": {
+              "$ref": "#/definitions/InternalServerErrorRes"
+            }
+          }
+        },
+        "tags": [
+          "Favorites"
+        ],
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/api/home-library/favs/artist/{id}": {
+      "post": {
+        "operationId": "addArtistToFavorites",
+        "summary": "",
+        "description": "Add artist to favorites",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Add artist to favorites",
+            "schema": {
+              "$ref": "#/definitions/FavoritesDto"
+            }
+          },
+          "400": {
+            "description": "Add artist to favorites",
+            "schema": {
+              "$ref": "#/definitions/BadRequestRes"
+            }
+          },
+          "403": {
+            "description": "Add artist to favorites",
+            "schema": {
+              "$ref": "#/definitions/ForbiddenRes"
+            }
+          },
+          "404": {
+            "description": "Add artist to favorites",
+            "schema": {
+              "$ref": "#/definitions/NotFoundRes"
+            }
+          },
+          "500": {
+            "description": "Add artist to favorites",
+            "schema": {
+              "$ref": "#/definitions/InternalServerErrorRes"
+            }
+          }
+        },
+        "tags": [
+          "Favorites"
+        ],
+        "produces": [
+          "application/json"
+        ]
+      },
+      "delete": {
+        "operationId": "deleteArtistFromFavorites",
+        "summary": "",
+        "description": "Delete artist from favorites",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Delete artist from favorites"
+          },
+          "400": {
+            "description": "Delete artist from favorites",
+            "schema": {
+              "$ref": "#/definitions/BadRequestRes"
+            }
+          },
+          "403": {
+            "description": "Delete artist from favorites",
+            "schema": {
+              "$ref": "#/definitions/ForbiddenRes"
+            }
+          },
+          "404": {
+            "description": "Delete artist from favorites",
+            "schema": {
+              "$ref": "#/definitions/NotFoundRes"
+            }
+          },
+          "500": {
+            "description": "Delete artist from favorites",
+            "schema": {
+              "$ref": "#/definitions/InternalServerErrorRes"
+            }
+          }
+        },
+        "tags": [
+          "Favorites"
+        ],
+        "produces": [
+          "application/json"
+        ]
+      }
     }
   },
   "info": {
@@ -1127,9 +1476,6 @@
         "login": {
           "type": "string"
         },
-        "password": {
-          "type": "string"
-        },
         "version": {
           "type": "number"
         },
@@ -1145,7 +1491,6 @@
       "required": [
         "id",
         "login",
-        "password",
         "version",
         "createdAt",
         "updatedAt"
@@ -1447,6 +1792,122 @@
           "type": "number"
         }
       }
+    },
+    "ArtistResDto": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "grammy": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "name",
+        "grammy"
+      ]
+    },
+    "AlbumResDto": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "year": {
+          "type": "number"
+        },
+        "artistId": {
+          "type": "string",
+          "x-nullable": true
+        }
+      },
+      "required": [
+        "name",
+        "year",
+        "artistId"
+      ]
+    },
+    "TrackResDto": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "artistId": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "albumId": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "duration": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "name",
+        "artistId",
+        "albumId",
+        "duration"
+      ]
+    },
+    "FavoritesResDto": {
+      "type": "object",
+      "properties": {
+        "artists": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ArtistResDto"
+          }
+        },
+        "albums": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AlbumResDto"
+          }
+        },
+        "tracks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TrackResDto"
+          }
+        }
+      },
+      "required": [
+        "artists",
+        "albums",
+        "tracks"
+      ]
+    },
+    "FavoritesDto": {
+      "type": "object",
+      "properties": {
+        "artists": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "albums": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "tracks": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "artists",
+        "albums",
+        "tracks"
+      ]
     }
   },
   "securityDefinitions": {

@@ -15,6 +15,11 @@ export class UsersService {
   constructor(private readonly repo: UsersRepository) {}
 
   createUser(data: ICreateUser): IUser {
+    const users = this.repo.find({ login: data.login });
+    if (users.length) {
+      throw new BadRequestException(`User ${data.login} have already existed`);
+    }
+
     const newUser: IUser = {
       id: uuidV4().toString(),
       login: data.login,
